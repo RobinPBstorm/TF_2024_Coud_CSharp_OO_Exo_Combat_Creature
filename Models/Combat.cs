@@ -84,11 +84,11 @@ namespace Models
                         if (equipe1[indexCreature1].Vitesse >= equipe2[indexCreature2].Vitesse)
                         {
                             equipe1[indexCreature1].Attaquer(equipe2[indexCreature2]);
-                            equipe1[indexCreature2].Attaquer(equipe2[indexCreature1]);
+                            equipe2[indexCreature2].Attaquer(equipe1[indexCreature1]);
                         }
                         else
                         {
-                            equipe1[indexCreature2].Attaquer(equipe2[indexCreature1]);
+                            equipe2[indexCreature2].Attaquer(equipe1[indexCreature1]);
                             equipe1[indexCreature1].Attaquer(equipe2[indexCreature2]);
                         }
                     }

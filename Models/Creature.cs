@@ -17,7 +17,7 @@ namespace Models
             get { return _Force; }
             set 
             {
-                value = setValue(value, 15, 30);
+                value = setValue(value, 1, 10);
                 _Force = value; 
             }
         }
@@ -45,13 +45,10 @@ namespace Models
         public int Vitesse
         {
             get { return _Vitesse; }
-            set 
-            { 
-                if (value < 1 || value > 10)
-                {
-                    value = 1;
-                }
-                _Vitesse = value; 
+            set
+            {
+                value = setValue(value, 1, 10);
+                _Vitesse = value;
             }
         }
 
@@ -92,10 +89,52 @@ namespace Models
         public string Nom { get; set; }
         #endregion
         #endregion
+
+        #region constructeurs
+        public Creature (string nom)
+        {
+            Nom = nom;
+        }
+        public Creature (string nom, int force, int armure, int vitesse, int pointDeVie) : this(nom)
+        {
+            Force = force;
+            Armure = armure;
+            Vitesse = vitesse;
+            PointDeVieMax = pointDeVie;
+
+            // rajouter méthode pour vérifier le nombre de point attribué
+        }
+        #endregion
+
+        #region methodes
         protected int setValue(int value, int min, int max)
         {
+            if (value < min)
+            {
+                return min;
+            }
+            else if (value > max)
+            {
+                return max;
+            }
+            else
+            {
+                return value;
+            }
+        }
+        protected void genererStat(int bonusForce = 0, int bonusArmure = 0, int bonusVitesse = 0, int bonusPointDeVie = 0)
+        {
+            int total = 0;
+            do
+            {
+                Force = new Random().Next(bonusForce, 15 + bonusForce);
+                Armure = new Random().Next(bonusArmure, 15 + bonusArmure);
+                Vitesse = new Random().Next(bonusVitesse, 15 + bonusVitesse);
+                PointDeVieMax = 15 + new Random().Next(bonusPointDeVie, 15 + bonusPointDeVie);
 
-            return (value < min || value > max) ? min : value;
+                total = Force + Armure + Vitesse + PointDeVieActuel;
+            }
+            while (total < 30 || total > 42);
         }
 
         protected void sePrendDegats(int forceAdverse)
@@ -139,6 +178,11 @@ namespace Models
             vaEsquiver = true;
         }
 
-        
+        public override string ToString()
+        {
+            return $"({Nom}): Force ({Force}), Armure ({Armure}), Vitesse ({Vitesse}) et Point de vie ({PointDeVieActuel}/{PointDeVieMax})";
+        }
+        #endregion
+
     }
 }

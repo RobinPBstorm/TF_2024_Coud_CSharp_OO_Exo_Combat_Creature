@@ -9,10 +9,10 @@ namespace Models
 {
     public class Combat
     {
-        public EquipeCreature equipe1 { get; set; }
+        public Equipe<Creature> equipe1 { get; set; }
         int indexCreature1 = 0;
 
-        public EquipeCreature equipe2 { get; set; }
+        public Equipe<Creature> equipe2 { get; set; }
         int indexCreature2 = 0;
         public void boucle ()
         {
@@ -130,7 +130,7 @@ namespace Models
                 Console.WriteLine("Le joueur a gagné'");
             }
         }
-        public int ChangementCreatureJoueur(EquipeCreature equipe, int index)
+        public int ChangementCreatureJoueur(Equipe<Creature> equipe, int index)
         {
             int valeurEnInt;
             do
@@ -146,7 +146,7 @@ namespace Models
             while (equipe[valeurEnInt].PointDeVieActuel == 0);
             return index;
         }
-        public int ChangementCreatureAdverse(EquipeCreature equipe)
+        public int ChangementCreatureAdverse(Equipe<Creature> equipe)
         {
             int valeurEnInt = -1;
             do
